@@ -24,7 +24,7 @@ def stats(data, str):
         m = float(excpected_num_of_occurences(len(data[i]), str))
         if n==0: n+=1
         r.append(m/n)
-    plt.plot(np.arange(iters+1),losses, 'r-')
+    plt.plot(np.arange(iters+1),lossses, 'r-')
     plt.title('Gradient descent 0-1 loss')
     plt.ylabel('0-1 loss')
     plt.xlabel('Iteration')
