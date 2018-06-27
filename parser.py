@@ -3,7 +3,7 @@ import math
 
 
 D=180
-LABEL_SIZE = 1
+LABEL_SIZE = 3
 
 
 def string_normalize(string, target_length):
@@ -24,7 +24,7 @@ def string_normalize(string, target_length):
 
 
 
-def normalize(messy_data):
+def normalize(messy_data, num_of_features):
     """
 
     :param messy_data: list of strings
@@ -32,7 +32,7 @@ def normalize(messy_data):
     """
 
     for i in range(len(messy_data)):
-        messy_data[i] = string_normalize(messy_data[i], D)
+        messy_data[i] = string_normalize(messy_data[i], num_of_features)
     return np.stack(messy_data, axis=0)
 
 
@@ -58,8 +58,8 @@ def get_normalized_data(num_of_features=D, label_size=LABEL_SIZE):
     """
     data = get_data_from_file()
     data, vault = data[100:], data[:100]
-    data = normalize(data)
-    data, labels = data[:, :-LABEL_SIZE], data[:, -LABEL_SIZE:]
+    data = normalize(data, num_of_features)
+    data, labels = data[:, :-label_size], data[:, -label_size:]
     return data, labels, vault
 
 
