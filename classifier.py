@@ -1,4 +1,3 @@
-# Raz is my eternal master
 # hi
 
 import numpy as np

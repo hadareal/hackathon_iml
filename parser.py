@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import math
 
 
@@ -37,12 +36,11 @@ def normalize(messy_data):
     return np.stack(messy_data, axis=0)
 
 
-def hist(lens):
-    plt.hist(lens, bins=100)
-    plt.show()
+def get_data_from_file():
+    """
 
-
-def get_data():
+    :return: list of strings from file
+    """
     filename = 'human.txt'
     f = open(filename)
     data = f.readlines() #list of strings of bits
@@ -50,12 +48,18 @@ def get_data():
         data[i] = s.rstrip()
     return data
 
-def main():
 
-    data = get_data()
+def get_normalized_data(num_of_features=D, label_size=LABEL_SIZE):
+    """
+
+    :param string_len:
+    :param label_size:
+    :return: ndarray of size mXd where d=(string_len-label_size)
+    """
+    data = get_data_from_file()
     data, vault = data[100:], data[:100]
     data = normalize(data)
     data, labels = data[:, :-LABEL_SIZE], data[:, -LABEL_SIZE:]
+    return data, labels, vault
 
-if __name__ == "__main__":
-    main()
+
