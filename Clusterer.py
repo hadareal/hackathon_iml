@@ -46,3 +46,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def splitTrainTest(data, labels, trainPer):
+    """
+
+    :param data: mxd matrix of m feature samples
+    :param labels: list of m labels
+    :param trainPer: Percentage of data used for training
+    :return: trainData, testData, trainLabels, testLabels
+    """
+    m, d = data.shape
+    indices = np.random.permutation(m)
+    training_size = math.floor(m * (trainPer / 100))
+    training_idx, test_idx = indices[:training_size], indices[training_size:]
+    return data[training_idx, :], data[test_idx, :], labels[training_idx], labels[test_idx]
