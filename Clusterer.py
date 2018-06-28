@@ -2,7 +2,7 @@ import parser
 from random import choice
 import numpy as np
 import matplotlib.pyplot as plt
-
+import math
 
 ITERS = 10
 

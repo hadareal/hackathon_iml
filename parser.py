@@ -3,7 +3,7 @@ import math
 
 
 D=180
-LABEL_SIZE = 3
+LABEL_SIZE = 1
 
 
 def string_normalize(string, target_length):
