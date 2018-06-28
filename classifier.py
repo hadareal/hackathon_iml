@@ -56,7 +56,7 @@ def adaboost(samples, labels):
 def draw_plot(x_values, y1_values, y2_values):
 
     plt.plot(x_values, y1_values, 'g', x_values, y2_values, 'orange')
-    plt.xlabel('iteration')
+    plt.xlabel('num of features')
     plt.ylabel('score')
     plt.title('scores of svm and adaboost')
     green = mpatches.Patch(color='g',label='svm classifier')
@@ -77,28 +77,32 @@ def bagging(samples, lables):
 
 
 
-def main():
+def run():
     ada_scores = []
     svm_scores = []
     # bagging_scores = []
-    c = Clusterer.clusterer()
-    for i in range(ITERATIONS):
-        data,labels = parser.get_normalized_data()
-        data = c.matrix_feature_extracter(data)
-        samples, test_points, labels, test_points_labels = parser.split_train_test(data, labels, TRAIN_PERCENTAGE)
+    # c = Clusterer.clusterer()
+    num_of_features = [5,10,15,20,25,30,35,40,45,50,70,100,150]
+    for num in num_of_features:
+        samples,labels,test_points,test_points_labels = train_and_test(num)
+        # data = c.matrix_feature_extracter(data)
         ada = adaboost(samples,labels)
         s = svm(samples, labels)
-        b = bagging(samples,labels)
+        print (ada.score(test_points,test_points_labels))
+        print (s.score(test_points,test_points_labels))
         ada_scores.append(ada.score(test_points, test_points_labels))
         svm_scores.append(s.score(test_points,test_points_labels))
         # bagging_scores.append(b.score(test_points,test_points_labels))
-    draw_plot(np.arange(ITERATIONS),svm_scores,ada_scores)
+    draw_plot(num_of_features,svm_scores,ada_scores)
 
-def main2():
-    data,tails = parser.get_normalized_data()
-    labels = np.ravel(np.split(tails,len(tails[0]),axis=1)[0])
-    test_points = data.T
-    print(np.shape(test_points))
 
-main()
-# kClassifier.cart()
+def train_and_test(num_of_featurs):
+    data,tails = parser.get_normalized_data(num_of_features=num_of_featurs,label_size=2)
+    labels = np.split(tails,len(tails[0]),axis=1)[0] # taking only the first bit out of the tail
+    test_points = np.delete(np.append(data,labels,axis=1),np.s_[:1],axis=1)
+    test_point_labels = np.ravel(np.split(tails,len(tails[0]),axis=1)[1])
+    labels = np.ravel(labels)
+    # print (data.shape, labels.shape, test_points.shape, test_point_labels.shape)
+    return data, labels, test_points, test_point_labels
+
+run()

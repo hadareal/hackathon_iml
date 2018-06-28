@@ -2,8 +2,8 @@ import numpy as np
 import math
 
 
-D=15
-LABEL_SIZE = 1
+D=20
+LABEL_SIZE = 5
 
 
 def string_normalize(string, target_length):
