@@ -11,7 +11,20 @@ ITERS = 10
 
 
 def bin_derivative(v):
-    return ''.join(['0' if v[i] == v[i + 1] else '1' for i in range(len(v) - 1)])
+    return ([0 if v[i] == v[i + 1] else 1 for i in range(len(v) - 1)])
+
+def matrix_bin_derivative(X):
+    """
+
+    :param X: mXd ndarray to be differentiated
+    :return: mX(d-1) differentiated ndarray
+    """
+    m,d = X.shape
+    R = [0]*m
+    for i in range(m):
+        R[i] = bin_derivative(X[i])
+    return np.stack(R)
+
 
 
 def num_of_occurences(string, substring):
@@ -48,7 +61,12 @@ def stats(data, str):
 def main():
     # s = ''.join(choice(['0', '1']) for i in xrange(20))
     # n=100000
-    data = parser.get_data_from_file()
+    data , labels= parser.get_normalized_data()
+    print data.shape
+    print data.shape
+    d_data = matrix_bin_derivative(data)
+    print d_data.shape
+
 
 
     # t = data[5]

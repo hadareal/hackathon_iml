@@ -60,7 +60,7 @@ def get_normalized_data(num_of_features=D, label_size=LABEL_SIZE):
     data, vault = data[100:], data[:100]
     data = normalize(data, num_of_features)
     data, labels = data[:, :-label_size], data[:, -label_size:]
-    print type(data[0][0])
+    return data, labels
 
 def split_train_test(data, labels, train_per):
     """
