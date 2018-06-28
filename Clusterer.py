@@ -100,12 +100,6 @@ class clusterer:
     # plt.show()
     # #
 
-    data, labels = parser.get_normalized_data()
-    print data.shape
-    c = clusterer()
-    d_data = c.matrix_feature_extracter(data)
-    print d_data.shape
-
 #
 #
 # if __name__ == "__main__":
