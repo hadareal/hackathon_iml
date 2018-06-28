@@ -2,7 +2,7 @@ import numpy as np
 import math
 
 
-D=180
+D=15
 LABEL_SIZE = 1
 
 

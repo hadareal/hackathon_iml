@@ -26,6 +26,7 @@ class clusterer:
 
         for i, substring in enumerate(self.substrings):
             m = float(self.num_of_occurences(s_v, substring))
+            if self.expected[i]==0:self.expected[i]=0.0001
             features.append(m / self.expected[i])
         return features
 
@@ -57,7 +58,7 @@ class clusterer:
         return string.count(substring)
 
     def excpected_num_of_occurences(self, string_len, substring):
-        s = 0
+        s = 0.0
         for i in range(ITERS):
             string = ''.join(choice(['0', '1']) for i in xrange(string_len))
             cur = self.num_of_occurences(string, substring)

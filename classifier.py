@@ -13,7 +13,7 @@ from ex4_tools import DecisionStump, decision_boundaries
 import math
 
 TRAIN_PERCENTAGE = 90.0
-ITERATIONS = 10
+ITERATIONS = 50
 
 def svm(samples, labels):
     """
@@ -23,7 +23,7 @@ def svm(samples, labels):
     :return: svm classifier
     """
 
-    svm = SVC(kernel='rbf')
+    svm = SVC(kernel='sigmoid')
     svm.fit(samples, labels)
     return svm
 
