@@ -63,4 +63,19 @@ def get_normalized_data(num_of_features=D, label_size=LABEL_SIZE):
     return data, labels
 
 
+def split_train_test(data, labels, train_per):
+    """
+
+    :param data: mxd matrix of m feature samples
+    :param labels: list of m labels
+    :param train_per: Percentage of data used for training
+    :return: trainData, testData, trainLabels, testLabels
+    """
+
+    m, d = data.shape
+    indices = np.random.permutation(m)
+    training_size = int(m * (train_per / 100.0))
+    training_idx, test_idx = indices[:training_size], indices[training_size:]
+    return data[training_idx, :], data[test_idx, :], np.ravel(labels[training_idx]), np.ravel(labels[test_idx])
+
 
