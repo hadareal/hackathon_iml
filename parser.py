@@ -58,6 +58,8 @@ def get_normalized_data(num_of_features=D, label_size=LABEL_SIZE):
     """
     data = get_data_from_file()
     data, vault = data[100:], data[:100]
+    for i in range(1027):
+        data[i] = data[i][:-20]
     data = normalize(data, num_of_features)
     data, labels = data[:, :-label_size], data[:, -label_size:]
     return data, labels
