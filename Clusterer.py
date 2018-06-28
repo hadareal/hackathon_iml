@@ -74,6 +74,35 @@ class clusterer:
 
 
 def main():
+    # s = ''.join(choice(['0', '1']) for i in xrange(20))
+    # n=100000
+    data , labels= parser.get_normalized_data()
+    print (data.shape)
+    print (data.shape)
+    d_data = matrix_bin_derivative(data)
+    print (d_data.shape)
+
+
+
+    # t = data[5]
+    # n = float(len(t))
+    # e = []
+    # for i in range(20):
+    #     e.append(t.count('0')/n)
+    #     t = bin_derivative(t)
+    #
+    # s = [str(random.randint(0,1)) for i in range(int(n))]
+    # s = ''.join(s)
+    # n = float(len(s))
+    # d = []
+    # for i in range(20):
+    #     d.append(s.count('0')/n)
+    #     s = bin_derivative(s)
+    #
+    # plt.plot(e)
+    # plt.show()
+    # #
+
     data, labels = parser.get_normalized_data()
     print data.shape
     c = clusterer()
