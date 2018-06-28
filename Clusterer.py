@@ -74,14 +74,10 @@ class clusterer:
             r.append(m / n)
 
 
-def main():
-    # s = ''.join(choice(['0', '1']) for i in xrange(20))
-    # n=100000
-    data , labels= parser.get_normalized_data()
-    print (data.shape)
-    print (data.shape)
-    d_data = matrix_bin_derivative(data)
-    print (d_data.shape)
+# def main():
+#     # s = ''.join(choice(['0', '1']) for i in xrange(20))
+#     # n=100000
+#
 
 
 
@@ -110,7 +106,7 @@ def main():
     d_data = c.matrix_feature_extracter(data)
     print d_data.shape
 
-
-
-if __name__ == "__main__":
-    main()
+#
+#
+# if __name__ == "__main__":
+#     main()
