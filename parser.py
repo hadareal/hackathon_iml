@@ -20,7 +20,7 @@ def string_normalize(string, target_length):
         string = string * math.ceil(target_length / len(string))
         return string_normalize(string, target_length)
 
-    return [t for t in string]
+    return [int(t) for t in string]
 
 
 
@@ -57,6 +57,7 @@ def get_normalized_data(num_of_features=D, label_size=LABEL_SIZE):
     :return: ndarray of size mXd where d=(string_len-label_size)
     """
     data = get_data_from_file()
+    print data
     data, vault = data[100:], data[:100]
     data = normalize(data, num_of_features)
     data, labels = data[:, :-label_size], data[:, -label_size:]
@@ -78,4 +79,19 @@ def split_train_test(data, labels, train_per):
     training_idx, test_idx = indices[:training_size], indices[training_size:]
     return data[training_idx, :], data[test_idx, :], np.ravel(labels[training_idx]), np.ravel(labels[test_idx])
 
+
+def k_split_train_test(data, labels, train_per):
+    """
+
+    :param data: mxd matrix of m feature samples
+    :param labels: list of m labels
+    :param train_per: Percentage of data used for training
+    :return: trainData, testData, trainLabels, testLabels
+    """
+
+    m, d = data.shape
+    indices = np.random.permutation(m)
+    training_size = int(m * (train_per / 100.0))
+    training_idx, test_idx = indices[:training_size], indices[training_size:]
+    return data[training_idx, :], data[test_idx, :], labels[training_idx, :], labels[test_idx, :]
 
