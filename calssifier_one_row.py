@@ -35,7 +35,7 @@ def check_row(j):
         n = ''
         for i in new:
             n += str(i)
-          predict += str(n)
+            predict += str(n)
     labels = np.array([int(i) for i in labels])
     predict = np.array([int(i) for i in predict])
     return check_error(labels, predict)
