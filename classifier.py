@@ -53,15 +53,16 @@ def adaboost(samples, labels):
     ada.fit(samples, labels)
     return ada
 
-def draw_plot(x_values, y1_values, y2_values):
+def draw_plot(x_values, y1_values, y2_values, y3_values):
 
-    plt.plot(x_values, y1_values, 'g', x_values, y2_values, 'orange')
+    plt.plot(x_values, y1_values, 'g', x_values, y2_values, 'orange', x_values, y3_values, 'blue')
     plt.xlabel('num of features')
     plt.ylabel('score')
     plt.title('scores of svm and adaboost')
     green = mpatches.Patch(color='g',label='svm classifier')
     orange = mpatches.Patch(color='orange', label='adaboost classifier')
-    plt.legend(handles=[orange, green])
+    blue = mpatches.Patch(color='blue',label='bagging classifier')
+    plt.legend(handles=[orange, green, blue])
     plt.show()
 
 def bagging(samples, lables):
@@ -80,7 +81,7 @@ def bagging(samples, lables):
 def run():
     ada_scores = []
     svm_scores = []
-    # bagging_scores = []
+    bagging_scores = []
     # c = Clusterer.clusterer()
     num_of_features = [5,10,15,20,25,30,35,40,45,50,70,100,150]
     for num in num_of_features:
@@ -88,12 +89,15 @@ def run():
         # data = c.matrix_feature_extracter(data)
         ada = adaboost(samples,labels)
         s = svm(samples, labels)
-        print (ada.score(test_points,test_points_labels))
-        print (s.score(test_points,test_points_labels))
+        b = bagging(samples,labels)
+        # print (ada.score(test_points,test_points_labels))
+        # print (s.score(test_points,test_points_labels))
+        # print b.score(test_points, test_points_labels)
         ada_scores.append(ada.score(test_points, test_points_labels))
         svm_scores.append(s.score(test_points,test_points_labels))
-        # bagging_scores.append(b.score(test_points,test_points_labels))
-    draw_plot(num_of_features,svm_scores,ada_scores)
+        bagging_scores.append(b.score(test_points,test_points_labels))
+    print bagging_scores
+    draw_plot(num_of_features,svm_scores,ada_scores, bagging_scores)
 
 
 def train_and_test(num_of_featurs):
@@ -105,4 +109,6 @@ def train_and_test(num_of_featurs):
     # print (data.shape, labels.shape, test_points.shape, test_point_labels.shape)
     return data, labels, test_points, test_point_labels
 
+def making_prediction():
+    samples,labels,test_points,test_points_labels = train_and_test(num)
 run()
