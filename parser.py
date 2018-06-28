@@ -57,7 +57,6 @@ def get_normalized_data(num_of_features=D, label_size=LABEL_SIZE):
     :return: ndarray of size mXd where d=(string_len-label_size)
     """
     data = get_data_from_file()
-    print data
     data, vault = data[100:], data[:100]
     data = normalize(data, num_of_features)
     data, labels = data[:, :-label_size], data[:, -label_size:]
